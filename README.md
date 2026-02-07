@@ -22,4 +22,4 @@ As próximas etapas de aprendizado incluem:
 
 
 ---
-[![LinkedIn](https://img.shields.io/badge/Conectar_no_LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=FF16C6&labelColor=000000)]((https://www.linkedin.com/in/elianaalmeida/))
+[![LinkedIn](https://img.shields.io/badge/Conectar_no_LinkedIn-000000?style=for-the-badge&logo=linkedin&logoColor=FF16C6&labelColor=000000)](https://www.linkedin.com/in/elianaalmeida/)
