@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="img/svg" sizes="40x40" href="/img/Sparkling.svg">
+    <link rel="icon" type="image/png" sizes="40x40" href="./img/Sparkling.svg">
     <link rel="stylesheet" href="style.css">
     <title>Meu portifólio</title>
 </head>
 <body>
+    <script src="script.js" defer></script>
     
     <header>
 
@@ -26,6 +27,12 @@
         </nav>
         
         <a href="./PDF/curriculo-eliana-engenharia.pdf" download="Curriculo-Eliana-Silva.pdf" id="button-curriculo">Currículo <img src="./img/Download.svg"></a>
+        
+        <button class="menu-hamburguer" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
 
@@ -40,24 +47,34 @@
 
 
                     <div class="social-links">
-                    <a href="https://www.linkedin.com/in/elianaalmeida/" target="_blank">
+                    <a href="https://www.linkedin.com/in/elianaalmeida/" >
                         <img class="logos-redes" src="./img/LinkedIn Circled.svg">
                         Linkedin
                     </a>
                     
-                    <a  href="https://github.com/Eliana100" target="_blank" >
+                    <a  href="https://github.com/Eliana100" class="link-item-redes">
                         <img class="logos-redes" src="./img/GitHub.svg">GitHub</a>
                     
-                    <a href="https://discord.gg/cDfuwc4f" target="_blank">
+                    <a href="https://discord.gg/cDfuwc4f" class="link-item-redes">
                         <img class="logos-redes" src="./img/Discord.svg">Discord</a>
 
                     </div>
             </div>
             
-            
-            <img id="minha-img" src="/img/avatar-eliana.svg" alt="Minha foto em desenho">
-            
+            <div class="foto-wrapper">
+
+            <img id="minha-img" src="/img/meu-avatar.svg" alt="Minha foto em desenho">
+            <div class="quadrado q-vazado-1"></div>
+            <div class="quadrado q-preenchido-1"></div>
+            <div class="quadrado q-vazado-2"></div>
+            <div class="quadrado q-preenchido-2"></div>
+            <div class="quadrado q-vazado-3"></div>
+            <div class="quadrado q-preenchido-3"></div>
+            <div class="quadrado q-vazado-4"></div>
+            <div class="quadrado q-preenchido-4"></div>
+            </div>
         </div>
+    </section>
 
 
 </body>
