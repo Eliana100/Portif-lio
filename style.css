@@ -88,8 +88,16 @@ header {
 }
 
 .titulos {
-    background: -webkit-linear-gradient( var(--padrao-color), var(--padrao-color), var(--terty-color--), var(--secondary-color--));
+    background: linear-gradient(
+        var(--padrao-color),
+        var(--padrao-color),
+        var(--terty-color--),
+        var(--secondary-color--)
+  );
+
     -webkit-background-clip: text;
+    background-clip: text;
+
     -webkit-text-fill-color: transparent;
     font-size: 64px;
 }
@@ -127,6 +135,35 @@ header {
     justify-content: space-between;
     gap: 8px;
 }
+
+@media (max-width: 480px) {
+
+body {
+    font-size: 16px;
+}
+
+#minha-img {
+    width: 400px;
+    height: 404.6px;
+}
+
+.inicioContainer {
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    display: table-column;
+    justify-content: center;
+    align-items:center;
+}
+
+.titulos {
+    font-size: 30px;
+}
+
+}
+
+
 
 
 
