@@ -408,6 +408,7 @@ header {
   .q-vazado-4 {
     width: 16px;
     height: 16px;
+    border-radius: 3px;
   }
   .q-preenchido-1,
   .q-preenchido-2,
@@ -415,6 +416,7 @@ header {
   .q-preenchido-4 {
     width: 10px;
     height: 10px;
+    border-radius: 3px;
   }
 
   .q-preenchido-1 {
