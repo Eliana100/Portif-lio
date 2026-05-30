@@ -369,15 +369,20 @@ header {
     font-size: 32px;
     text-align: left;
   }
+  
+   .texto br {
+    display: none;
+  }
 
   .texto {
     font-size: 19px;
-    text-align: left;
-    margin: 6px 0;
+    margin: 2;
+    width: 100%;
   }
 
   .texto p {
-    line-height: 1.5;
+    line-height: 1.7;
+    margin-top: 20px;
   }
 
   .infoContainer {
