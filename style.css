@@ -39,6 +39,8 @@ header {
   background-color: var(--header-color);
   opacity: 0.8;
   max-width: 1200px;
+  position: relative;
+  z-index: 1000;
 }
 
 .logo a {
@@ -51,7 +53,6 @@ header {
   height: auto;
 }
 
-/* justify-content removido: não funciona em inline-block */
 .links-nav li {
   display: inline-block;
   padding: 0px 20px;
@@ -71,6 +72,11 @@ header {
   border-radius: 35px;
   background-color: var(--padrao-color);
   color: var(--primary-color--);
+}
+
+#button-curriculo:hover {
+  transform: scale(1.04);
+  transition: transform 0.1s ease;
 }
 
 .container {
@@ -235,8 +241,6 @@ header {
   }
 }
 
-/* Bloco .links a removido: classe .links não existe no HTML */
-
 .social-links {
   display: flex;
   gap: 16px;
@@ -259,4 +263,190 @@ header {
 .logos-redes {
   width: 28px;
   height: auto;
+}
+
+/* Botão Hambúrguer */
+.menu-hamburguer {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.menu-hamburguer span {
+  width: 30px;
+  height: 3px;
+  background-color: var(--padrao-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-hamburguer.active span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+}
+
+.menu-hamburguer.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-hamburguer.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Media Query para Mobile */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  header {
+    padding: 0 20px;
+    height: 70px;
+    margin: 0;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(92, 37, 141, 0.95);
+    padding: 20px 0;
+    z-index: 1000;
+  }
+
+  .navbar.active {
+    display: block;
+  }
+
+  .links-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .links-nav li {
+    display: block;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  #button-curriculo {
+    display: none;
+  }
+
+  .menu-hamburguer {
+    display: flex;
+  }
+
+  .container {
+    padding: 40px 20px 0;
+  }
+
+  .inicioContainer {
+    flex-direction: column-reverse;
+    gap: 25px;
+  }
+
+  .foto-wrapper {
+    width: 280px;
+    height: 300px;
+    position: relative;
+  }
+
+  #minha-img {
+    width: 99%;
+    padding: 20px;
+  }
+
+  .titulos {
+    font-size: 32px;
+    text-align: left;
+  }
+
+  .texto {
+    font-size: 19px;
+    text-align: left;
+    margin: 6px 0;
+  }
+
+  .texto p {
+    line-height: 1.5;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .social-links {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .social-links a {
+    width: 110px;
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  .logos-redes {
+    width: 20px;
+  }
+
+  /* Quadradinhos espalhados pela tela */
+  .q-vazado-1,
+  .q-vazado-2,
+  .q-vazado-3,
+  .q-vazado-4 {
+    width: 16px;
+    height: 16px;
+  }
+  .q-preenchido-1,
+  .q-preenchido-2,
+  .q-preenchido-3,
+  .q-preenchido-4 {
+    width: 10px;
+    height: 10px;
+  }
+
+  .q-preenchido-1 {
+    top: 8%;
+    left: -8px;
+  }
+  .q-vazado-1 {
+    top: 12%;
+    left: -15px;
+  }
+  .q-preenchido-2 {
+    bottom: 30%;
+    left: -8px;
+  }
+  .q-vazado-2 {
+    bottom: 25%;
+    left: -15px;
+  }
+  .q-vazado-3 {
+    top: 10%;
+    right: -15px;
+  }
+  .q-preenchido-3 {
+    top: 15%;
+    right: -8px;
+  }
+  .q-vazado-4 {
+    bottom: 32%;
+    right: -15px;
+  }
+  .q-preenchido-4 {
+    bottom: 27%;
+    right: -8px;
+  }
 }
