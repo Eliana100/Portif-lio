@@ -456,4 +456,35 @@ header {
     bottom: 27%;
     right: -8px;
   }
+
+  /* Seção Formação - Mobile */
+  .formacao-section {
+    padding: 60px 20px;
+  }
+
+  .formacao-section .titulos {
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+
+  .linha-decorativa {
+    width: 200px;
+    height: 40px;
+    border-width: 2px;
+    border-radius: 0 0 0 20px;
+  }
+
+  .card-formacao {
+    flex: 0 0 280px;
+    min-height: 160px;
+  }
+
+  .card-formacao h3 {
+    font-size: 16px;
+  }
+
+  .badge-graduacao {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
 }
