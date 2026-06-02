@@ -123,3 +123,35 @@ if (cardsTop && cardsBottom && wrapperTop && wrapperBottom) {
   setupDragToScroll(wrapperTop);
   setupDragToScroll(wrapperBottom);
 }
+
+// ==================== ANIMAÇÕES AO SCROLL ====================
+const observerOptions = {
+  threshold: 0.15,
+  rootMargin: '0px 0px -80px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observar título e texto da seção Sobre
+const sobreWrapper = document.querySelector('.container-sobre .wrapper');
+const sobreTexto = document.querySelector('.container-sobre .texto');
+
+if (sobreWrapper) observer.observe(sobreWrapper);
+if (sobreTexto) observer.observe(sobreTexto);
+
+// Observar título da seção Conhecimento
+const conhecimentoTitulo = document.querySelector('.container-conhecimento .titulos');
+if (conhecimentoTitulo) observer.observe(conhecimentoTitulo);
+
+// Observar cada skill pill com delay escalonado
+const skillPills = document.querySelectorAll('.skill-pill');
+skillPills.forEach((pill, index) => {
+  pill.style.transitionDelay = `${index * 0.04}s`;
+  observer.observe(pill);
+});
