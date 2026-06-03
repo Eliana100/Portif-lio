@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="40x40" href="./img/Sparkling.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Detalhes do Projeto</title>
+  </head>
+  <body class="pagina-detalhes">
+    <header>
+      <div class="logo">
+        <a href="index.html"><img src="./img/Sparkling.svg" alt="Logo" /></a>
+      </div>
+
+      <nav class="navbar">
+        <ul class="links-nav">
+          <li class="links-menu"><a href="index.html">Início</a></li>
+          <li class="links-menu"><a href="index.html">Voltar aos Projetos</a></li>
+        </ul>
+      </nav>
+
+      <a href="./PDF/Software Engineering Student  - curriculo.pdf" download="Curriculo-Eliana-Silva.pdf" id="button-curriculo">
+        Currículo <img src="./img/Download.svg" alt="Baixar" />
+      </a>
+
+      <button class="menu-hamburguer" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main class="container-detalhes">
+        <!-- Hero: Imagem Grande -->
+        <section class="hero-projeto">
+            <div class="banner-wrapper" id="projeto-banner">
+                <!-- Imagem injetada pelo JS -->
+            </div>
+        </section>
+
+        <!-- Mini Carrossel de Prévias -->
+        <section class="galeria-projeto">
+            <button class="seta-galeria prev" onclick="scrollGaleria(-1)">&#10094;</button>
+            <div class="thumbnails-container" id="projeto-galeria">
+                <!-- Thumbs injetadas pelo JS -->
+            </div>
+            <button class="seta-galeria next" onclick="scrollGaleria(1)">&#10095;</button>
+        </section>
+
+        <!-- Informações e Links -->
+        <section class="info-projeto">
+            <div class="sobre-projeto">
+                <h2 class="titulos" id="titulo-pagina">Sobre</h2>
+                <div class="texto">
+                    <p id="projeto-descricao"><!-- Texto injetado --></p>
+                </div>
+            </div>
+
+            <!-- Card de Links com o estilo reaproveitado da formação -->
+            <div class="card-links-projeto card-formacao">
+                <p class="tag">Acesse completo</p>
+                <ul id="lista-links">
+                    <!-- Links injetados -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+      <p>© Eliana Silva 2026. Todos os Direitos Reservados.</p>
+    </footer>
+
+    <script src="script-detalhes.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+  </body>
+</html>

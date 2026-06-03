@@ -12,7 +12,7 @@ const listaFormacao = [
 // Função para gerar o HTML do Card
 function criarCard(item) {
   return `
-    <div class="card-formacao">
+    <div class="card-formacao" tabindex="0" aria-label="Formação: ${item.curso}">
       <p class="tag">${item.tag}</p>
       <h3 class="curso-nome">${item.curso}</h3>
       <div class="card-footer">
@@ -50,7 +50,83 @@ function renderizarCursos() {
 // Inicializa a renderização
 renderizarCursos();
 
-// ==================== Menu hambúrguer ====================
+const projetos = [
+    {
+        id: "nova-fit",
+        categoria: "dev",
+        capa: "img/capa_novafit.svg",
+    },
+    {
+        id: "moove",
+        categoria: "dev",
+        capa: "img/Capa_github.svg",
+    },
+    {
+        id: "on-game",
+        categoria: "dev",
+        capa: "img/capa_ongame2.png",
+    },
+    {
+        id: "casas-bahia",
+        categoria: "dev",
+        capa: "img/casas.png",
+    },
+    {
+        id: "nasa-space-apps",
+        categoria: "dev",
+        capa: "img/cumaru.svg",
+      
+    },
+    {
+        id: "freelance-zirighair",
+        categoria: "ux",
+        capa: "img/mockupzirigh.svg",
+      
+    },
+    {
+        id: "casas-bahia-ux",
+        categoria: "ux",
+        capa: "img/thermokids.svg",
+    },
+    {
+        id: "proa",
+        categoria: "ux",
+        capa: "img/capa_lunna.svg",
+    }
+];
+
+function renderizarProjetos() {
+    const devContainer = document.getElementById('carrossel-dev');
+    const uxContainer = document.getElementById('carrossel-ux');
+
+    let htmlDev = '';
+    let htmlUx = '';
+
+    projetos.forEach(proj => {
+        const cardHTML = `
+            <div class="projeto-card" tabindex="0" role="button" aria-label="Detalhes do projeto ${proj.id}" onclick="irParaDetalhes('${proj.id}')" onkeydown="if(event.key === 'Enter') irParaDetalhes('${proj.id}')">
+                <img src="${proj.capa}" alt="Capa do projeto ${proj.id}">
+            </div>
+        `;
+
+        if (proj.categoria === 'dev') htmlDev += cardHTML;
+        else htmlUx += cardHTML;
+    });
+
+    const repeticoes = 10;
+    if (devContainer) devContainer.innerHTML = Array(repeticoes).fill(htmlDev).join('');
+    if (uxContainer) uxContainer.innerHTML = Array(repeticoes).fill(htmlUx).join('');
+}
+
+function irParaDetalhes(id) {
+    // Redireciona para a nova página passando o ID na URL
+    window.location.href = `projetos.html?id=${id}`;
+}
+
+// Inicia tudo
+renderizarProjetos();
+
+// Menu hambúrguer
 const menuHamburguer = document.querySelector('.menu-hamburguer');
 const navbar = document.querySelector('.navbar');
 
@@ -61,32 +137,26 @@ if (menuHamburguer && navbar) {
   });
 }
 
-// ==================== CARROSSEL FORMAÇÃO - ROLAGEM E DRAG ====================
-const cardsTop = document.querySelector('.cards-top');
-const cardsBottom = document.querySelector('.cards-bottom');
-const wrapperTop = cardsTop?.parentElement;
-const wrapperBottom = cardsBottom?.parentElement;
-
-if (cardsTop && cardsBottom && wrapperTop && wrapperBottom) {
-
-  // Configura a funcionalidade de arrastar para rolar (Drag to Scroll)
-  function setupDragToScroll(wrapper) {
+//  carrousel
+function setupDragToScroll(wrapper) {
     let isDown = false;
     let startX;
     let scrollLeftStart;
+
+    const animatedElements = wrapper.querySelectorAll('.cards-top, .cards-bottom');
 
     wrapper.addEventListener('mousedown', (e) => {
       isDown = true;
       startX = e.pageX - wrapper.offsetLeft;
       scrollLeftStart = wrapper.scrollLeft;
-      wrapper.querySelector('.cards-top, .cards-bottom').style.animationPlayState = 'paused';
+      animatedElements.forEach(el => el.style.animationPlayState = 'paused');
     });
 
     wrapper.addEventListener('mouseleave', () => {
       if (isDown) {
         isDown = false;
         setTimeout(() => {
-          wrapper.querySelector('.cards-top, .cards-bottom').style.animationPlayState = 'running';
+          animatedElements.forEach(el => el.style.animationPlayState = 'running');
         }, 1500);
       }
     });
@@ -95,7 +165,7 @@ if (cardsTop && cardsBottom && wrapperTop && wrapperBottom) {
       if (isDown) {
         isDown = false;
         setTimeout(() => {
-          wrapper.querySelector('.cards-top, .cards-bottom').style.animationPlayState = 'running';
+          animatedElements.forEach(el => el.style.animationPlayState = 'running');
         }, 1500);
       }
     });
@@ -110,21 +180,22 @@ if (cardsTop && cardsBottom && wrapperTop && wrapperBottom) {
 
     // Eventos de toque para Mobile
     wrapper.addEventListener('touchstart', () => {
-      wrapper.querySelector('.cards-top, .cards-bottom').style.animationPlayState = 'paused';
+      animatedElements.forEach(el => el.style.animationPlayState = 'paused');
     }, { passive: true });
 
     wrapper.addEventListener('touchend', () => {
       setTimeout(() => {
-        wrapper.querySelector('.cards-top, .cards-bottom').style.animationPlayState = 'running';
+        animatedElements.forEach(el => el.style.animationPlayState = 'running');
       }, 1500);
     }, { passive: true });
-  }
-
-  setupDragToScroll(wrapperTop);
-  setupDragToScroll(wrapperBottom);
 }
 
-// ==================== ANIMAÇÕES AO SCROLL ====================
+const todosWrappers = document.querySelectorAll('.cards-wrapper');
+todosWrappers.forEach(wrapper => {
+  setupDragToScroll(wrapper);
+});
+
+// animação scroll
 const observerOptions = {
   threshold: 0.15,
   rootMargin: '0px 0px -80px 0px'
@@ -155,3 +226,32 @@ skillPills.forEach((pill, index) => {
   pill.style.transitionDelay = `${index * 0.04}s`;
   observer.observe(pill);
 });
+
+// --- Cookie Banner Dinâmico ---
+function initCookieBanner() {
+  // Verifica se o usuário já aceitou os cookies
+  if (!localStorage.getItem('cookiesAceitos')) {
+    const banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.innerHTML = `
+      <div class="cookie-icon" style="font-size: 32px;" aria-hidden="true">🍪</div>
+      <div class="cookie-text">
+        Usamos cookies para melhorar sua experiência no meu site pessoal. Ao continuar navegando, você concorda com o uso de cookies.
+      </div>
+      <button class="cookie-btn" aria-label="Aceitar cookies">Entendi</button>
+    `;
+    document.body.appendChild(banner);
+
+    // Mostra o banner suavemente com um delay
+    setTimeout(() => banner.classList.add('show'), 500);
+
+    // Salva a escolha do usuário e esconde o banner ao clicar
+    banner.querySelector('.cookie-btn').addEventListener('click', () => {
+      localStorage.setItem('cookiesAceitos', 'true');
+      banner.classList.remove('show');
+      setTimeout(() => banner.remove(), 500); // Remove do DOM após a transição
+    });
+  }
+}
+
+initCookieBanner();
