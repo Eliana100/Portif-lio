@@ -868,12 +868,8 @@ header {
   animation-delay: 2.5s;
 }
 
-/* Media Query para Mobile */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-  }
-
+/* --- Adaptação do Menu para Tablets e Mobile (até 1024px) --- */
+@media (max-width: 1024px) {
   header {
     padding: 0 20px;
     height: 70px;
@@ -915,6 +911,13 @@ header {
 
   .menu-hamburguer {
     display: flex;
+  }
+}
+
+/* Media Query para Mobile */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
   }
 
   .container {
@@ -1330,7 +1333,8 @@ header {
 }
 
 @keyframes flutuarBanner {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(-50%) translateY(0);
   }
   50% {
@@ -1354,7 +1358,9 @@ header {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
 }
 
 .cookie-btn:hover {
@@ -1374,5 +1380,100 @@ header {
   }
   .cookie-btn {
     width: 100%;
+  }
+}
+
+/* --- Adaptação para Tablets e Laptops Menores (iPads, telas de 769px a 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 5% 40px 0;
+  }
+  .inicioContainer {
+    flex-direction: column-reverse;
+    gap: 50px;
+    gap: 30px;
+  }
+  .foto-wrapper {
+    width: 750px;
+    width: 400px;
+    height: 430px;
+  }
+  .titulos {
+    font-size: 42px;
+  }
+  .texto {
+    font-size: 18px;
+  }
+  .texto br {
+    display: none; /* Deixa o texto fluir livremente sem quebras */
+  }
+  .social-links {
+    gap: 15px;
+  }
+  .social-links a {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0; /* Esconde o texto para deixar só o ícone */
+    gap: 0; /* Anula o gap do Desktop para alinhar o ícone ao centro */
+  }
+  .projeto-card {
+    flex: 0 0 350px;
+    height: 220px;
+  }
+  .card-formacao {
+    flex: 0 0 300px;
+    min-height: 200px;
+    padding: 20px;
+  }
+  .info-projeto {
+    gap: 30px;
+  }
+  .thumb-item {
+    flex: 0 0 240px;
+    height: 160px;
+  }
+}
+
+/* --- Adaptação para Monitores Ultra-Wide, iMacs e Smart TVs (Telas Gigantes) --- */
+@media (min-width: 1440px) {
+  header,
+  .container {
+    max-width: 1400px;
+  }
+  .titulos {
+    font-size: 80px;
+  }
+  .texto {
+    font-size: 28px;
+  }
+  .foto-wrapper {
+    width: 600px;
+    height: 650px;
+  }
+  .projeto-card {
+    flex: 0 0 550px;
+    height: 340px;
+  }
+  .card-formacao {
+    flex: 0 0 450px;
+    min-height: 300px;
+  }
+  .cookie-banner {
+    max-width: 1000px;
+  }
+  .galeria-projeto,
+  .info-projeto {
+    max-width: 1400px;
+  }
+  .thumb-item {
+    flex: 0 0 350px;
+    height: 220px;
+  }
+  .banner-wrapper img {
+    max-height: 70vh; /* Impede que a foto cubra 100% de uma tela de TV limitando a 70% da altura dela */
+    object-fit: cover;
+    object-position: top;
   }
 }
