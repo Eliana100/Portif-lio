@@ -1159,6 +1159,7 @@ header {
 .hero-projeto {
   width: 100%;
   margin-top: 0;
+  position: relative;
 }
 
 .banner-wrapper {
@@ -1179,7 +1180,7 @@ header {
   margin: 40px auto;
   display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
   max-width: 1100px;
   padding: 0 20px;
 }
@@ -1199,8 +1200,8 @@ header {
 }
 
 .thumb-item {
-  flex: 0 0 280px;
-  height: 180px;
+  flex: 0 0 240px;
+  height: 150px;
   border-radius: 20px;
   overflow: hidden;
   border: 2px solid transparent;
@@ -1221,6 +1222,9 @@ header {
 }
 
 .seta-galeria {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background: var(--padrao-color);
   color: var(--primary-color--);
   border: none;
@@ -1235,6 +1239,15 @@ header {
   font-size: 20px;
   transition: background 0.3s ease;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.seta-galeria.prev {
+  left: 15px;
+}
+
+.seta-galeria.next {
+  right: 15px;
 }
 
 .seta-galeria:hover {
@@ -1291,8 +1304,8 @@ header {
     gap: 40px;
   }
   .thumb-item {
-    flex: 0 0 220px;
-    height: 140px;
+    flex: 0 0 180px;
+    height: 115px;
   }
 }
 
@@ -1431,8 +1444,8 @@ header {
     gap: 30px;
   }
   .thumb-item {
-    flex: 0 0 240px;
-    height: 160px;
+    flex: 0 0 200px;
+    height: 130px;
   }
 }
 
@@ -1468,8 +1481,8 @@ header {
     max-width: 1400px;
   }
   .thumb-item {
-    flex: 0 0 350px;
-    height: 220px;
+    flex: 0 0 300px;
+    height: 190px;
   }
   .banner-wrapper img {
     max-height: 70vh; /* Impede que a foto cubra 100% de uma tela de TV limitando a 70% da altura dela */
