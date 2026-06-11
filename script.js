@@ -103,6 +103,10 @@ const projetos = [
     }
 ];
 
+/* Variáveis globais de controle das barras de progresso */
+let devDimensions = { maxRange: 0 };
+let uxDimensions = { maxRange: 0 };
+
 /* 2. Carregamento dos projetos (dev e ux) */
 // Monta os cards dos projetos e insere no DOM.
 function renderizarProjetos() {
@@ -115,7 +119,7 @@ function renderizarProjetos() {
     projetos.forEach(proj => {
         const cardHTML = `
             <div class="cartao-projeto" tabindex="0" role="button" aria-label="Detalhes do projeto ${proj.id}" onclick="irParaDetalhes('${proj.id}')" onkeydown="if(event.key === 'Enter') irParaDetalhes('${proj.id}')">
-                <img src="${proj.capa}" alt="Capa do projeto ${proj.id}" draggable="false" loading="lazy">
+                <img src="${proj.capa}" alt="Capa do projeto ${proj.id}" draggable="false" loading="lazy" onerror="this.src='./img/Capa_github.svg'">
             </div>
         `;
 
@@ -126,6 +130,13 @@ function renderizarProjetos() {
     const repeticoes = 10;
     if (devContainer) devContainer.innerHTML = Array(repeticoes).fill(htmlDev).join('');
     if (uxContainer) uxContainer.innerHTML = Array(repeticoes).fill(htmlUx).join('');
+
+    // Atualiza as barras de progresso sempre que os projetos forem renderizados
+    const totalDev = projetos.filter(p => p.categoria === 'dev').length;
+    const totalUx = projetos.filter(p => p.categoria === 'ux').length;
+    criarSegmentosProgresso('progress-dev', totalDev);
+    criarSegmentosProgresso('progress-ux', totalUx);
+    updateProgressBarDimensions();
 }
 
 // Redireciona para a tela de detalhes do projeto.
@@ -135,6 +146,43 @@ function irParaDetalhes(id) {
 }
 
 renderizarProjetos();
+
+/* 2.1 Integração com a API do GitHub */
+async function buscarProjetosGitHub() {
+    const usuario = 'Eliana100'; // Seu nome de usuário no GitHub
+    try {
+        const resposta = await fetch(`https://api.github.com/users/${usuario}/repos?sort=updated&per_page=100`);
+        if (!resposta.ok) throw new Error('Não foi possível buscar os repositórios');
+        
+        const repos = await resposta.json();
+        
+        // Filtra os repositórios que possuem a tag (tópico) "portfolio"
+        const reposPortfolio = repos.filter(repo => repo.topics && repo.topics.includes('portfolio'));
+        
+        reposPortfolio.forEach(repo => {
+            // Evita duplicatas caso o ID já exista na constante estática 'projetos'
+            if (!projetos.find(p => p.id === repo.name)) {
+                projetos.push({
+                    id: repo.name,
+                    // Se tiver o tópico 'ux', vai pro carrossel UX, senão Dev
+                    categoria: repo.topics.includes('ux') ? 'ux' : 'dev',
+                    // Tenta puxar uma imagem 'capa.png' direto do seu repositório.
+                    // Se não tiver, o 'onerror' da tag img vai colocar a imagem padrão.
+                    capa: `https://raw.githubusercontent.com/${usuario}/${repo.name}/main/capa.png`
+                });
+            }
+        });
+
+        // Re-renderiza os carrosséis com os projetos estáticos + os dinâmicos do GitHub
+        renderizarProjetos();
+
+    } catch (erro) {
+        console.error('Erro na integração com o GitHub:', erro);
+    }
+}
+
+// Inicia a busca assim que a página carregar
+buscarProjetosGitHub();
 
 /* 3. Menu mobile e navegação */
 // Alterna o menu mobile em telas menores.
@@ -269,9 +317,6 @@ function initCookieBanner() {
 initCookieBanner();
 
 /* 7. Lógica da barra de progresso dos projetos */
-// Atualiza a barra de progresso dos carrosséis de projetos.
-let devDimensions = { maxRange: 0 };
-let uxDimensions = { maxRange: 0 };
 
 function criarSegmentosProgresso(containerId, totalItens) {
   const container = document.getElementById(containerId);
@@ -283,11 +328,6 @@ function criarSegmentosProgresso(containerId, totalItens) {
   }
   container.innerHTML = html;
 }
-
-const totalDev = projetos.filter(p => p.categoria === 'dev').length;
-const totalUx = projetos.filter(p => p.categoria === 'ux').length;
-criarSegmentosProgresso('progress-dev', totalDev);
-criarSegmentosProgresso('progress-ux', totalUx);
 
 function updateProgressBarDimensions() {
   const devInner = document.getElementById('carrossel-dev');

@@ -63,24 +63,62 @@ const dadosProjetos = {
 // Obtém o ID do projeto a partir da URL.
 const urlParams = new URLSearchParams(window.location.search);
 const projetoId = urlParams.get('id');
-const projeto = dadosProjetos[projetoId];
 let imagemAtualIndex = 0;
+let projeto = dadosProjetos[projetoId];
 
-// Preenche o conteúdo da página usando os dados do projeto.
-if (projeto) {
-    document.title = `${projeto.titulo} | Detalhes`;
-    document.getElementById('projeto-banner').innerHTML = `<img src="${projeto.banner}" alt="${projeto.titulo}">`;
-    document.getElementById('projeto-descricao').innerText = projeto.descricao;
+function preencherPagina(projetoAtual) {
+    if (!projetoAtual) return;
+    document.title = `${projetoAtual.titulo} | Detalhes`;
+    document.getElementById('projeto-banner').innerHTML = `<img src="${projetoAtual.banner}" alt="${projetoAtual.titulo}" onerror="this.src='img/Capa_github.svg'">`;
+    document.getElementById('projeto-descricao').innerText = projetoAtual.descricao;
 
     const galeriaContainer = document.getElementById('projeto-galeria');
-    projeto.galeria.forEach((img, index) => {
-        galeriaContainer.innerHTML += `<div class="item-miniatura" tabindex="0" role="button" aria-label="Ver miniatura ${index + 1}" onclick="trocarImagem(${index})" onkeydown="if(event.key === 'Enter') trocarImagem(${index})"><img src="${img}" alt="Miniatura ${index + 1}"></div>`;
-    });
+    galeriaContainer.innerHTML = '';
+    if (projetoAtual.galeria && projetoAtual.galeria.length > 0) {
+        projetoAtual.galeria.forEach((img, index) => {
+            galeriaContainer.innerHTML += `<div class="item-miniatura" tabindex="0" role="button" aria-label="Ver miniatura ${index + 1}" onclick="trocarImagem(${index})" onkeydown="if(event.key === 'Enter') trocarImagem(${index})"><img src="${img}" alt="Miniatura ${index + 1}" onerror="this.src='img/Capa_github.svg'"></div>`;
+        });
+    }
 
     const linksContainer = document.getElementById('lista-links');
-    projeto.links.forEach(link => {
+    linksContainer.innerHTML = '';
+    projetoAtual.links.forEach(link => {
         linksContainer.innerHTML += `<li><strong>${link.nome}</strong><br><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.url}</a></li>`;
     });
+}
+
+if (projeto) {
+    // Projeto estático cadastrado
+    preencherPagina(projeto);
+} else if (projetoId) {
+    // Se não está no arquivo estático, busca as informações na API do GitHub!
+    buscarDetalhesNoGitHub(projetoId);
+}
+
+async function buscarDetalhesNoGitHub(id) {
+    const usuario = 'Eliana100';
+    try {
+        const resposta = await fetch(`https://api.github.com/repos/${usuario}/${id}`);
+        if (!resposta.ok) throw new Error('Repositório não encontrado no GitHub');
+        
+        const repo = await resposta.json();
+        
+        projeto = {
+            titulo: repo.name.replace(/-/g, ' ').toUpperCase(),
+            banner: `https://raw.githubusercontent.com/${usuario}/${repo.name}/main/capa.png`,
+            descricao: repo.description || 'Projeto desenvolvido por Eliana Silva. (Importado automaticamente do GitHub)',
+            galeria: [],
+            links: [
+                { nome: "Repositório GitHub", url: repo.html_url },
+                ...(repo.homepage ? [{ nome: "Acesso Online / Deploy", url: repo.homepage }] : [])
+            ]
+        };
+        
+        preencherPagina(projeto);
+    } catch (erro) {
+        console.error(erro);
+        document.getElementById('projeto-descricao').innerHTML = '<strong>Projeto dinâmico não encontrado!</strong>';
+    }
 }
 
 // Alterna a imagem principal do projeto.
