@@ -15,10 +15,11 @@ As próximas etapas de aprendizado incluem:
 
 <br>
 
-- [x] **Integração com GitHub API:** Implementação de scripts para consumir os dados dos meus repositórios em tempo real.
-- [x] **Atualização Automática de Projetos:** Sempre que um novo projeto for marcado com a tag `portfolio`, ele aparecerá automaticamente no site.
-- [x] **Cards Dinâmicos:** As descrições, linguagens utilizadas e links de deploy serão injetados no DOM via JS, sem necessidade de alteração manual no HTML.
-- [ ] **Filtro de Projetos:** Sistema de busca e filtros por tecnologia (ex: Java, CSS, UX) utilizando lógica de programação no front-end.
+- <img src="https://img.shields.io/badge/-%E2%9C%93-C71585?style=flat" alt="check" /> **Integração com GitHub API:** Implementação de scripts para consumir os dados dos meus repositórios em tempo real.
+- <img src="https://img.shields.io/badge/-%E2%9C%93-C71585?style=flat" alt="check" /> **Atualização Automática de Projetos:** Sempre que um novo projeto for marcado com a tag `portfolio`, ele aparecerá automaticamente no site.
+- <img src="https://img.shields.io/badge/-%E2%9C%93-C71585?style=flat" alt="check" /> **Cards Dinâmicos:** As descrições, linguagens utilizadas e links de deploy serão injetados no DOM via JS, sem necessidade de alteração manual no HTML.
+
+  - [ ] **Filtro de Projetos:** Sistema de busca e filtros por tecnologia (ex: Java, CSS, UX) utilizando lógica de programação no front-end.
 
 ---
 
