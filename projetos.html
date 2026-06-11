@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="40x40" href="./img/Sparkling.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="40x40"
+      href="./img/Sparkling.svg"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Detalhes do Projeto</title>
   </head>
   <body class="pagina-detalhes">
+    <!-- Seção cabeçalho -->
     <header>
       <div class="logo">
         <a href="index.html"><img src="./img/Sparkling.svg" alt="Logo" /></a>
@@ -16,11 +22,17 @@
       <nav class="navbar">
         <ul class="links-nav">
           <li class="links-menu"><a href="index.html">Início</a></li>
-          <li class="links-menu"><a href="index.html">Voltar aos Projetos</a></li>
+          <li class="links-menu">
+            <a href="index.html">Voltar aos Projetos</a>
+          </li>
         </ul>
       </nav>
 
-      <a href="./PDF/Software Engineering Student  - curriculo.pdf" download="Curriculo-Eliana-Silva.pdf" id="button-curriculo">
+      <a
+        href="./PDF/Software Engineering Student  - curriculo.pdf"
+        download="Curriculo-Eliana-Silva.pdf"
+        id="button-curriculo"
+      >
         Currículo <img src="./img/Download.svg" alt="Baixar" />
       </a>
 
@@ -32,41 +44,53 @@
     </header>
 
     <main class="container-detalhes">
-        <!-- Hero: Imagem Grande -->
-        <section class="hero-projeto">
-            <div class="banner-wrapper" id="projeto-banner">
-                <!-- Imagem injetada pelo JS -->
-            </div>
-            <button class="seta-galeria prev" aria-label="Imagem anterior" onclick="scrollGaleria(-1)">&#10094;</button>
-            <button class="seta-galeria next" aria-label="Próxima imagem" onclick="scrollGaleria(1)">&#10095;</button>
-        </section>
+      <!-- Banner destaque (hero) -->
+      <section class="destaque-projeto">
+        <div class="container-banner" id="projeto-banner">
+          <!-- Imagem injetada pelo JS -->
+        </div>
+        <button
+          class="seta-galeria prev"
+          aria-label="Imagem anterior"
+          onclick="scrollGaleria(-1)"
+        >
+          &#10094;
+        </button>
+        <button
+          class="seta-galeria next"
+          aria-label="Próxima imagem"
+          onclick="scrollGaleria(1)"
+        >
+          &#10095;
+        </button>
+      </section>
 
-        <!-- Mini Carrossel de Prévias -->
-        <section class="galeria-projeto">
-            <div class="thumbnails-container" id="projeto-galeria">
-                <!-- Thumbs injetadas pelo JS -->
-            </div>
-        </section>
+      <!-- Miniaturas da galeria -->
+      <section class="galeria-projeto">
+        <div class="container-miniaturas" id="projeto-galeria">
+          <!-- Thumbs injetadas pelo JS -->
+        </div>
+      </section>
 
-        <!-- Informações e Links -->
-        <section class="info-projeto">
-            <div class="sobre-projeto">
-                <h2 class="titulos" id="titulo-pagina">Sobre</h2>
-                <div class="texto">
-                    <p id="projeto-descricao"><!-- Texto injetado --></p>
-                </div>
-            </div>
+      <!-- Informações do projeto -->
+      <section class="informacoes-projeto">
+        <div class="sobre-projeto">
+          <h2 class="titulos" id="titulo-pagina">Sobre</h2>
+          <div class="texto">
+            <p id="projeto-descricao"><!-- Texto injetado --></p>
+          </div>
+        </div>
 
-            <!-- Card de Links com o estilo reaproveitado da formação -->
-            <div class="card-links-projeto card-formacao">
-                <p class="tag">Acesse completo</p>
-                <ul id="lista-links">
-                    <!-- Links injetados -->
-                </ul>
-            </div>
-        </section>
+        <div class="cartao-links-projeto cartao-formacao">
+          <p class="tag">Acesse completo</p>
+          <ul id="lista-links">
+            <!-- Links injetados -->
+          </ul>
+        </div>
+      </section>
     </main>
 
+    <!-- Rodapé -->
     <footer class="footer">
       <p>© Eliana Silva 2026. Todos os Direitos Reservados.</p>
     </footer>
@@ -82,7 +106,7 @@
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
   </body>
 </html>

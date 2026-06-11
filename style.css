@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Onest:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@400..900&family=Questrial&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap");
 
+/* 1. Reset e variáveis gerais */
 * {
-  /*reset*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,12 +9,16 @@
   list-style: none;
   color: var(--padrao-color);
 
-  /*paleta de cores*/
   --primary-color--: #150134;
   --secondary-color--: #c200ff;
   --terty-color--: #ff16c6;
   --padrao-color: #fff;
   --header-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Rolagem suave na página */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Acessibilidade: Destaque ao focar com teclado */
@@ -25,10 +29,10 @@ button:focus-visible,
   outline-offset: 4px;
 }
 
-/* --- Customização do VLibras --- */
+/* Customização do VLibras */
 [vw-access-button] {
   background: transparent !important;
-  /* Altera a cor da imagem original do azul para roxo/magenta usando filtro de cor */
+  /* Altera a cor da imagem usando filtro */
   filter: hue-rotate(80deg) saturate(1.2) !important;
 }
 
@@ -36,13 +40,16 @@ body {
   background-color: var(--primary-color--);
   background-image: url(./img/fundo-portfifolio.svg);
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: center;
   background-size: cover;
+  background-attachment: fixed;
   font-family: "Kanit", sans-serif;
   font-size: 20px;
   color: var(--padrao-color);
+  overflow-x: hidden;
 }
 
+/* 2. Cabeçalho e menu principal */
 header {
   display: flex;
   justify-content: space-between;
@@ -94,6 +101,7 @@ header {
   transition: transform 0.1s ease;
 }
 
+/* 3. Seção início e seções gerais */
 .container {
   display: grid;
   align-items: center;
@@ -103,7 +111,7 @@ header {
   max-width: 1200px;
 }
 
-.inicioContainer {
+.container-inicio {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -153,7 +161,7 @@ header {
   padding-left: 10px;
 }
 
-/*Animação de Entrada Suave*/
+/* Animação de entrada suave */
 @keyframes entradaSuave {
   from {
     opacity: 0;
@@ -165,14 +173,13 @@ header {
   }
 }
 
-.infoContainer,
-.foto-wrapper,
+.container-informacoes,
+.container-foto,
 .wrapper {
   animation: entradaSuave 1.2s ease-out forwards;
 }
 
-/*bloco que engloba a foto e os quadradinhos*/
-.foto-wrapper {
+.container-foto {
   position: relative;
   display: flex;
   justify-content: center;
@@ -188,19 +195,20 @@ header {
   width: 100%;
 }
 
-.wrapper .q-preenchido-1 {
+.wrapper .quadrado-preenchido-1 {
   top: 1%;
   left: -1px;
   animation-delay: 0.3s;
 }
 
-.wrapper .q-vazado-1 {
+.wrapper .quadrado-vazado-1 {
   top: 15%;
   left: -25px;
   animation-delay: 0.7s;
   margin-top: 10px;
 }
 
+/* 4. Seção sobre, conhecimento e rodapé */
 .sobre {
   padding: 10px;
 }
@@ -210,6 +218,7 @@ header {
 }
 
 .footer {
+  margin-top: 10px;
   padding: 20px;
   background: var(--secondary-color--);
   color: var(--padrao-color);
@@ -219,12 +228,74 @@ header {
   text-align: center;
 }
 
+.contato {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 40px;
+  gap: 20px;
+  justify-items: center;
+}
+
+.call {
+  display: grid;
+  grid-column: auto;
+}
+
+.whats {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--padrao-color);
+  color: var(--primary-color--);
+  border: solid 5px var(--secondary-color--);
+  border-radius: 12px;
+  margin: 10px 0px;
+  font-weight: 500;
+}
+
+.whats:hover {
+  color: var(--padrao-color);
+  background-color: var(--secondary-color--);
+  border: solid 5px var(--padrao-color);
+}
+
+.whats:hover .whatsApp {
+  filter: brightness(0) invert(1);
+}
+
+.email {
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    var(--padrao-color),
+    var(--terty-color--),
+    var(--secondary-color--)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.whatsApp {
+  width: 30px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  background-color: rgba(77, 35, 110, 0.13);
+}
+
 .container-sobre {
   margin-bottom: 50px;
 }
 
-/* Máscara de fade-out nas extremidades dos carrosséis */
-.cards-wrapper {
+/* 5. Carrosséis e estruturas dos projetos */
+.container-cards {
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
@@ -245,7 +316,6 @@ header {
   mask-repeat: no-repeat;
 }
 
-/* --- SEÇÃO PROJETOS DEV E UX (ESTRUTURA MANTIDA) --- */
 .projetos-carrossel {
   display: flex;
   gap: 30px;
@@ -253,83 +323,65 @@ header {
   margin-bottom: 50px;
 }
 
-.projeto-card {
-  flex: 0 0 450px; /* Mantém a largura original */
-  height: 280px; /* Mantém a altura original */
+.cartao-projeto {
+  flex: 0 0 450px; /* Mantém a largura */
+  height: 280px; /* Mantém a altura */
   border-radius: 24px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.projeto-card img {
+.cartao-projeto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none; /* Impede o arrasto da imagem */
 }
 
-.projeto-card:hover {
+.cartao-projeto:hover {
   border-color: var(--secondary-color--);
   transform: scale(1.02);
 }
 
-.projeto-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px;
-  background: linear-gradient(to top, rgba(21, 1, 52, 0.9), transparent);
-}
-
-.projeto-overlay h3 {
-  font-size: 24px;
-  margin: 5px 0;
-}
-
-.projeto-overlay span {
-  font-size: 14px;
-  color: var(--terty-color--);
-}
-
-/* --- WRAPPER PARA O SCROLL --- */
-.cards-wrapper {
-  overflow: hidden;
-  width: 100%;
-}
-
-/*.projetos-carrossel {
+/* 6. Barras de progresso do carrossel */
+.barra-progresso-segmentada {
   display: flex;
-  gap: 30px;
-  padding: 20px 0;
-  margin-bottom: 50px;
-}
-
-.projeto-card {
-  flex: 0 0 450px; 
-  height: 280px;
-  border-radius: 24px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.4s ease;
-}
-
-.projeto-card img {
+  gap: 8px;
   width: 100%;
+  max-width: 350px;
+  height: 6px;
+  margin: -35px auto 40px; /* Centralizado abaixo */
+  position: relative;
+  z-index: 10;
+}
+
+.segmento-progresso {
+  flex: 1;
   height: 100%;
-  object-fit: cover;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.projeto-card:hover {
-  border-color: var(--secondary-color--);
-  transform: scale(1.02);
+.preenchimento-segmento {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--terty-color--),
+    var(--secondary-color--)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
 }
 
-.projeto-overlay {
+.sobreposicao-projeto {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -338,26 +390,23 @@ header {
   background: linear-gradient(to top, rgba(21, 1, 52, 0.9), transparent);
 }
 
-.projeto-overlay h3 {
+.sobreposicao-projeto h3 {
   font-size: 24px;
   margin: 5px 0;
 }
 
-.projeto-overlay span {
+.sobreposicao-projeto span {
   font-size: 14px;
   color: var(--terty-color--);
 }
-  */
 
-/*fim seção projetos*/
-
+/* 7. Fotos flutuantes, decoração e redes sociais */
 #minha-img {
   width: 90%;
   z-index: 2;
   animation: flutuar 4s ease-in-out infinite;
 }
 
-/*animação foto*/
 @keyframes flutuar {
   0% {
     transform: translateY(0);
@@ -377,70 +426,64 @@ header {
   animation: brilho 3s infinite ease-in-out;
 }
 
-.q-vazado-1,
-.q-vazado-2,
-.q-vazado-3,
-.q-vazado-4 {
+.quadrado-vazado-1,
+.quadrado-vazado-2,
+.quadrado-vazado-3,
+.quadrado-vazado-4 {
   border: 2px solid var(--padrao-color);
   width: 22px;
   height: 22px;
 }
-.q-preenchido-1,
-.q-preenchido-2,
-.q-preenchido-3,
-.q-preenchido-4 {
+.quadrado-preenchido-1,
+.quadrado-preenchido-2,
+.quadrado-preenchido-3,
+.quadrado-preenchido-4 {
   background-color: var(--padrao-color);
   width: 15px;
   height: 15px;
 }
 
-/*Posições quadradinhos*/
-/* Esquerda - par de cima */
-.q-preenchido-1 {
+.quadrado-preenchido-1 {
   top: 18%;
   left: -20px;
   animation-delay: 0s;
 }
-.q-vazado-1 {
+.quadrado-vazado-1 {
   top: 26%;
   left: -30px;
   animation-delay: 0.5s;
 }
-/* Esquerda - par de baixo */
-.q-preenchido-2 {
+.quadrado-preenchido-2 {
   bottom: 28%;
   left: -20px;
   animation-delay: 0.8s;
 }
-.q-vazado-2 {
+.quadrado-vazado-2 {
   bottom: 20%;
   left: -30px;
   animation-delay: 1.2s;
 }
-/* Direita - par de cima */
-.q-vazado-3 {
+.quadrado-vazado-3 {
   top: 22%;
   right: -35px;
   animation-delay: 1s;
 }
-.q-preenchido-3 {
+.quadrado-preenchido-3 {
   top: 32%;
   right: -22px;
   animation-delay: 1.4s;
 }
-/* Direita - par de baixo */
-.q-vazado-4 {
+.quadrado-vazado-4 {
   bottom: 32%;
   right: -35px;
   animation-delay: 1.8s;
 }
-.q-preenchido-4 {
+.quadrado-preenchido-4 {
   bottom: 22%;
   right: -22px;
   animation-delay: 2.2s;
 }
 
-/*Animação quadradinhos (diminuir e sumir)*/
 @keyframes brilho {
   0%,
   100% {
@@ -453,13 +496,13 @@ header {
   }
 }
 
-.social-links {
+.links-sociais {
   display: flex;
   gap: 16px;
   margin-top: 40px;
 }
 
-.social-links a {
+.links-sociais a {
   width: 160px;
   padding: 14px 10px;
   display: flex;
@@ -469,15 +512,14 @@ header {
   border-radius: 50px;
   border: 2px solid var(--padrao-color);
 }
-.social-links a:hover {
+.links-sociais a:hover {
   background-color: var(--secondary-color--);
 }
-.logos-redes {
+.logo-redes {
   width: 28px;
   height: auto;
 }
 
-/* Botão Hambúrguer */
 .menu-hamburguer {
   display: none;
   flex-direction: column;
@@ -507,7 +549,8 @@ header {
 .menu-hamburguer.active span:nth-child(3) {
   transform: rotate(-45deg) translate(7px, -7px);
 }
-.carrosel-formacao {
+/* 8. Animações e cartões do carrossel de formação */
+.carrossel-formacao {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -515,7 +558,7 @@ header {
   max-width: 100%;
 }
 
-.cards-wrapper {
+.container-cards {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -523,36 +566,34 @@ header {
   scroll-behavior: auto;
 }
 
-.cards-wrapper:active {
+.container-cards:active {
   cursor: grabbing;
 }
 
-.cards-wrapper::-webkit-scrollbar {
+.container-cards::-webkit-scrollbar {
   display: none;
 }
 
-.cards-top,
-.cards-bottom {
+.cards-cima,
+.cards-baixo {
   display: flex;
   gap: 20px;
   width: fit-content;
   padding: 10px 0;
   user-select: none;
+  will-change: transform;
 }
 
-/* Animação de scroll automático para cima (direita) */
-.cards-top {
+.cards-cima {
   animation: scrollRight 90s linear infinite;
 }
 
-/* Animação de scroll automático para baixo (esquerda) */
-.cards-bottom {
+.cards-baixo {
   animation: scrollLeft 90s linear infinite;
 }
 
-/* Pausa a animação ao interagir */
-.cards-wrapper:hover .cards-top,
-.cards-wrapper:hover .cards-bottom {
+.container-cards:hover .cards-cima,
+.container-cards:hover .cards-baixo {
   animation-play-state: paused;
 }
 
@@ -574,12 +615,12 @@ header {
   }
 }
 
-.cards-top:active,
-.cards-bottom:active {
+.cards-cima:active,
+.cards-baixo:active {
   cursor: grabbing;
 }
 
-.card-formacao {
+.cartao-formacao {
   display: flex;
   flex-direction: column;
   min-height: 250px;
@@ -592,18 +633,20 @@ header {
   background-color: rgba(21, 1, 52, 0.6);
   backdrop-filter: blur(10px);
   transition:
-    transform 40s ease,
+    transform 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.card-formacao:hover {
+.cartao-formacao:hover {
   transform: translateY(-5px);
   border-color: var(--secondary-color--);
   box-shadow: 0 10px 25px rgba(183, 0, 255, 0.212);
 }
 
-.carrosel-formacao .card-formacao .tag {
+.carrossel-formacao .cartao-formacao .tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -616,25 +659,24 @@ header {
   border: 2px solid var(--padrao-color);
 }
 
-/* Alinhamento do Rodapé do Card */
-.card-footer {
+.rodape-cartao {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.card-footer .ano {
+.rodape-cartao .ano {
   font-size: 16px;
   opacity: 0.8;
 }
 
-.card-footer .universidade {
+.rodape-cartao .universidade {
   font-size: 20px;
   font-weight: 700;
 }
 
-/* Seção Sobre */
+/* 9. Animações da seção sobre e pílulas de conhecimento */
 .container-sobre .wrapper {
   opacity: 0;
   transform: translateY(20px);
@@ -661,7 +703,6 @@ header {
   transform: translateY(0);
 }
 
-/* Seção Conhecimento */
 .container-conhecimento {
   position: relative;
   padding: 80px 60px;
@@ -685,7 +726,7 @@ header {
   transform: translateY(0);
 }
 
-.skills-grid {
+.grade-habilidades {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -694,7 +735,7 @@ header {
   margin: 0 auto;
 }
 
-.skill-pill {
+.pilula-habilidade {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -717,61 +758,60 @@ header {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.skill-pill.visible {
+.pilula-habilidade.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.skill-pill:hover {
+.pilula-habilidade:hover {
   box-shadow: 0 8px 20px rgba(194, 0, 255, 0.4);
   background-color: rgba(194, 0, 255, 0.1);
 }
 
-/* Animação de flutuação individual para cada pill */
-.skill-pill.visible {
+.pilula-habilidade.visible {
   animation: flutuarPill 6s ease-in-out infinite;
 }
 
-.skill-pill:nth-child(1) {
+.pilula-habilidade:nth-child(1) {
   animation-delay: 0s;
 }
-.skill-pill:nth-child(2) {
+.pilula-habilidade:nth-child(2) {
   animation-delay: 0.5s;
 }
-.skill-pill:nth-child(3) {
+.pilula-habilidade:nth-child(3) {
   animation-delay: 1s;
 }
-.skill-pill:nth-child(4) {
+.pilula-habilidade:nth-child(4) {
   animation-delay: 1.5s;
 }
-.skill-pill:nth-child(5) {
+.pilula-habilidade:nth-child(5) {
   animation-delay: 2s;
 }
-.skill-pill:nth-child(6) {
+.pilula-habilidade:nth-child(6) {
   animation-delay: 2.5s;
 }
-.skill-pill:nth-child(7) {
+.pilula-habilidade:nth-child(7) {
   animation-delay: 3s;
 }
-.skill-pill:nth-child(8) {
+.pilula-habilidade:nth-child(8) {
   animation-delay: 3.5s;
 }
-.skill-pill:nth-child(9) {
+.pilula-habilidade:nth-child(9) {
   animation-delay: 4s;
 }
-.skill-pill:nth-child(10) {
+.pilula-habilidade:nth-child(10) {
   animation-delay: 4.5s;
 }
-.skill-pill:nth-child(11) {
+.pilula-habilidade:nth-child(11) {
   animation-delay: 5s;
 }
-.skill-pill:nth-child(12) {
+.pilula-habilidade:nth-child(12) {
   animation-delay: 5.5s;
 }
-.skill-pill:nth-child(13) {
+.pilula-habilidade:nth-child(13) {
   animation-delay: 0.3s;
 }
-.skill-pill:nth-child(14) {
+.pilula-habilidade:nth-child(14) {
   animation-delay: 0.8s;
 }
 
@@ -785,90 +825,89 @@ header {
   }
 }
 
-.skill-pill img {
+.pilula-habilidade img {
   width: 32px;
   height: 32px;
   object-fit: contain;
 }
 
-/* Quadradinhos decorativos da seção conhecimento */
-.container-conhecimento .q-vazado-5,
-.container-conhecimento .q-vazado-6 {
+.container-conhecimento .quadrado-vazado-5,
+.container-conhecimento .quadrado-vazado-6 {
   border: 2px solid var(--padrao-color);
   width: 22px;
   height: 22px;
 }
 
-.container-conhecimento .q-preenchido-5,
-.container-conhecimento .q-preenchido-6 {
+.container-conhecimento .quadrado-preenchido-5,
+.container-conhecimento .quadrado-preenchido-6 {
   background-color: var(--padrao-color);
   width: 15px;
   height: 15px;
 }
 
-.container-conhecimento .q-vazado-7,
-.container-conhecimento .q-vazado-8 {
+.container-conhecimento .quadrado-vazado-7,
+.container-conhecimento .quadrado-vazado-8 {
   border: 2px solid var(--padrao-color);
   width: 22px;
   height: 22px;
 }
 
-.container-conhecimento .q-preenchido-7,
-.container-conhecimento .q-preenchido-8 {
+.container-conhecimento .quadrado-preenchido-7,
+.container-conhecimento .quadrado-preenchido-8 {
   background-color: var(--padrao-color);
   width: 15px;
   height: 15px;
 }
 
-.container-conhecimento .q-vazado-5 {
+.container-conhecimento .quadrado-vazado-5 {
   top: 15%;
   left: 50px;
   animation-delay: 0.2s;
 }
 
-.container-conhecimento .q-preenchido-5 {
+.container-conhecimento .quadrado-preenchido-5 {
   top: 25%;
   left: 30px;
   animation-delay: 0.6s;
 }
 
-.container-conhecimento .q-vazado-6 {
+.container-conhecimento .quadrado-vazado-6 {
   bottom: 1%;
   left: 20px;
   animation-delay: 1.1s;
 }
 
-.container-conhecimento .q-preenchido-6 {
+.container-conhecimento .quadrado-preenchido-6 {
   bottom: 5%;
   left: 35px;
   animation-delay: 1.5s;
 }
 
-.container-conhecimento .q-vazado-7 {
+.container-conhecimento .quadrado-vazado-7 {
   top: 20%;
   right: 55px;
   animation-delay: 0.9s;
 }
 
-.container-conhecimento .q-preenchido-7 {
+.container-conhecimento .quadrado-preenchido-7 {
   top: 35%;
   right: 35px;
   animation-delay: 1.7s;
 }
 
-.container-conhecimento .q-vazado-8 {
+.container-conhecimento .quadrado-vazado-8 {
   bottom: 5%;
   right: 65px;
   animation-delay: 2.1s;
 }
 
-.container-conhecimento .q-preenchido-8 {
+.container-conhecimento .quadrado-preenchido-8 {
   bottom: 15%;
   right: 40px;
   animation-delay: 2.5s;
 }
 
-/* --- Adaptação do Menu para Tablets e Mobile (até 1024px) --- */
+/* 10. Responsividade em tablets e telas médias (até 1024px) */
 @media (max-width: 1024px) {
   header {
     padding: 0 20px;
@@ -914,22 +953,26 @@ header {
   }
 }
 
-/* Media Query para Mobile */
+/* 11. Responsividade para celulares (até 768px) */
 @media (max-width: 768px) {
   body {
     font-size: 16px;
   }
 
-  .container {
-    padding: 40px 20px 0;
+  header {
+    padding: 0 24px;
   }
 
-  .inicioContainer {
+  .container {
+    padding: 40px 24px 0;
+  }
+
+  .container-inicio {
     flex-direction: column-reverse;
     gap: 25px;
   }
 
-  .foto-wrapper {
+  .container-foto {
     width: 280px;
     height: 300px;
     position: relative;
@@ -951,7 +994,7 @@ header {
 
   .texto {
     font-size: 19px;
-    margin: 2;
+    margin: 0;
     width: 100%;
   }
 
@@ -960,94 +1003,95 @@ header {
     margin-top: 20px;
   }
 
-  .infoContainer {
+  .container-informacoes {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .social-links {
+  .links-sociais {
     gap: 10px;
     margin-top: 20px;
+    flex-wrap: wrap;
   }
 
-  .social-links a {
-    width: 110px;
+  .links-sociais a {
+    width: auto;
+    flex: 1;
+    min-width: 100px;
     padding: 10px 8px;
     font-size: 14px;
   }
 
-  .logos-redes {
+  .logo-redes {
     width: 20px;
   }
 
-  /* Quadradinhos espalhados pela tela */
-  .q-vazado-1,
-  .q-vazado-2,
-  .q-vazado-3,
-  .q-vazado-4 {
+  .quadrado-vazado-1,
+  .quadrado-vazado-2,
+  .quadrado-vazado-3,
+  .quadrado-vazado-4 {
     width: 16px;
     height: 16px;
     border-radius: 3px;
   }
-  .q-preenchido-1,
-  .q-preenchido-2,
-  .q-preenchido-3,
-  .q-preenchido-4 {
+  .quadrado-preenchido-1,
+  .quadrado-preenchido-2,
+  .quadrado-preenchido-3,
+  .quadrado-preenchido-4 {
     width: 10px;
     height: 10px;
     border-radius: 2px;
   }
 
-  .q-preenchido-1 {
+  .quadrado-preenchido-1 {
     top: 8%;
     left: -8px;
   }
 
-  .wrapper .q-preenchido-1 {
+  .wrapper .quadrado-preenchido-1 {
     top: -15%;
     left: 2px;
     animation-delay: 0.3s;
   }
 
-  .wrapper .q-vazado-1 {
+  .wrapper .quadrado-vazado-1 {
     top: -5%;
     left: -12px;
     animation-delay: 0.7s;
   }
 
-  .q-vazado-1 {
+  .quadrado-vazado-1 {
     top: 14%;
     left: -19px;
   }
-  .q-preenchido-2 {
+  .quadrado-preenchido-2 {
     bottom: 30%;
     left: -8px;
   }
-  .q-vazado-2 {
+  .quadrado-vazado-2 {
     bottom: 22%;
     left: -19px;
   }
-  .q-vazado-3 {
+  .quadrado-vazado-3 {
     top: 10%;
     right: -15px;
   }
-  .q-preenchido-3 {
+  .quadrado-preenchido-3 {
     top: 17%;
     right: -8px;
   }
-  .q-vazado-4 {
+  .quadrado-vazado-4 {
     bottom: 32%;
     right: -15px;
   }
-  .q-preenchido-4 {
+  .quadrado-preenchido-4 {
     bottom: 27%;
     right: -8px;
   }
 
-  /* Seção Formação - Mobile */
   .secao-formacao {
-    padding: 60px 20px;
+    padding: 60px 24px;
   }
 
   .secao-formacao .titulos {
@@ -1055,21 +1099,21 @@ header {
     margin-bottom: 40px;
   }
 
-  .carrosel-formacao {
+  .carrossel-formacao {
     margin-left: 0;
     max-width: 100%;
     gap: 15px;
   }
 
-  .card-formacao {
-    flex: 0 0 280px;
+  .cartao-formacao {
+    flex: 0 0 240px;
     min-height: 160px;
     padding: 20px;
     margin: 5px;
     border-radius: 20px;
   }
 
-  .card-formacao h3 {
+  .cartao-formacao h3 {
     font-size: 16px;
   }
 
@@ -1078,9 +1122,8 @@ header {
     padding: 5px 12px;
   }
 
-  /* Seção Conhecimento - Mobile */
   .container-conhecimento {
-    padding: 60px 20px;
+    padding: 60px 24px;
   }
 
   .container-conhecimento .titulos {
@@ -1088,64 +1131,117 @@ header {
     margin-bottom: 40px;
   }
 
-  .skills-grid {
+  .grade-habilidades {
     gap: 12px;
   }
 
-  .skill-pill {
+  .pilula-habilidade {
     padding: 10px 20px;
     font-size: 16px;
     gap: 8px;
   }
 
-  .skill-pill img {
+  .pilula-habilidade img {
     width: 24px;
     height: 24px;
   }
 
-  /* Quadradinhos da seção conhecimento - Mobile */
-  .container-conhecimento .q-vazado-5 {
+  .container-conhecimento .quadrado-vazado-5 {
     top: 10%;
     left: 20px;
   }
 
-  .container-conhecimento .q-preenchido-5 {
+  .container-conhecimento .quadrado-preenchido-5 {
     top: 18%;
     left: 15px;
   }
 
-  .container-conhecimento .q-vazado-6 {
+  .container-conhecimento .quadrado-vazado-6 {
     bottom: 1%;
     left: 25px;
   }
 
-  .container-conhecimento .q-preenchido-6 {
+  .container-conhecimento .quadrado-preenchido-6 {
     bottom: 8%;
     left: 18px;
   }
 
-  .container-conhecimento .q-vazado-7 {
+  .container-conhecimento .quadrado-vazado-7 {
     top: 14%;
     right: 22px;
   }
 
-  .container-conhecimento .q-preenchido-7 {
+  .container-conhecimento .quadrado-preenchido-7 {
     top: 22%;
     right: 18px;
   }
 
-  .container-conhecimento .q-vazado-8 {
+  .container-conhecimento .quadrado-vazado-8 {
     bottom: 12%;
     right: 28px;
   }
 
-  .container-conhecimento .q-preenchido-8 {
+  .container-conhecimento .quadrado-preenchido-8 {
     bottom: 18%;
     right: 20px;
   }
+
+  .contato {
+    grid-template-columns: 1fr;
+    margin: 20px 24px;
+    gap: 40px;
+  }
+
+  .contato p {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .contato p br {
+    display: none;
+  }
+
+  .call {
+    justify-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .email {
+    font-size: 18px;
+  }
+
+  .whats {
+    width: 100%;
+  }
+
+  .secao-projetos {
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+
+  .projetos-carrossel {
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .cartao-projeto {
+    flex: 0 0 250px;
+    height: 160px;
+  }
+
+  .barra-progresso-segmentada {
+    max-width: 220px;
+    margin: -10px auto 20px;
+    gap: 6px;
+    height: 5px;
+  }
 }
 
-/* pagina de projetos */
+/* 12. Página específica do projeto (projeto.html) */
 .pagina-detalhes header {
   display: none;
 }
@@ -1156,17 +1252,17 @@ header {
   margin: 0;
 }
 
-.hero-projeto {
+.destaque-projeto {
   width: 100%;
   margin-top: 0;
   position: relative;
 }
 
-.banner-wrapper {
+.container-banner {
   width: 100%;
 }
 
-.banner-wrapper img {
+.container-banner img {
   width: 100%;
   border-radius: 0;
   box-shadow: none;
@@ -1185,7 +1281,7 @@ header {
   padding: 0 20px;
 }
 
-.thumbnails-container {
+.container-miniaturas {
   display: flex;
   gap: 20px;
   overflow-x: auto;
@@ -1195,11 +1291,11 @@ header {
   scrollbar-width: none;
 }
 
-.thumbnails-container::-webkit-scrollbar {
+.container-miniaturas::-webkit-scrollbar {
   display: none;
 }
 
-.thumb-item {
+.item-miniatura {
   flex: 0 0 240px;
   height: 150px;
   border-radius: 20px;
@@ -1210,12 +1306,12 @@ header {
     border-color 0.3s ease;
 }
 
-.thumb-item:hover {
+.item-miniatura:hover {
   transform: scale(1.05);
   border-color: var(--secondary-color--);
 }
 
-.thumb-item img {
+.item-miniatura img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1255,7 +1351,7 @@ header {
   color: var(--padrao-color);
 }
 
-.info-projeto {
+.informacoes-projeto {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 60px;
@@ -1265,28 +1361,28 @@ header {
   padding: 0 20px;
 }
 
-.card-links-projeto {
+.cartao-links-projeto {
   margin: 0;
 }
 
-.card-links-projeto:hover {
+.cartao-links-projeto:hover {
   transform: none;
   border-color: var(--padrao-color);
   box-shadow: none;
 }
 
-.card-links-projeto ul {
+.cartao-links-projeto ul {
   padding: 0;
   list-style: none;
   margin-top: 20px;
 }
 
-.card-links-projeto li {
+.cartao-links-projeto li {
   margin-bottom: 20px;
   font-size: 20px;
 }
 
-.card-links-projeto a {
+.cartao-links-projeto a {
   color: var(--secondary-color--);
   font-size: 16px;
   word-break: break-all;
@@ -1294,23 +1390,27 @@ header {
   transition: color 0.3s;
 }
 
-.card-links-projeto a:hover {
+.cartao-links-projeto a:hover {
   color: var(--terty-color--);
 }
 
 @media (max-width: 768px) {
-  .info-projeto {
+  .informacoes-projeto {
     grid-template-columns: 1fr;
     gap: 40px;
+    padding: 0 24px;
   }
-  .thumb-item {
+  .galeria-projeto {
+    padding: 0 24px;
+  }
+  .item-miniatura {
     flex: 0 0 180px;
     height: 115px;
   }
 }
 
-/* --- Cookie Banner --- */
-.cookie-banner {
+/* 13. Aviso de cookies (banner) */
+.banner-cookies {
   position: fixed;
   bottom: -100%;
   left: 0;
@@ -1339,7 +1439,7 @@ header {
   border-radius: 32px;
 }
 
-.cookie-banner.show {
+.banner-cookies.show {
   bottom: 0;
   bottom: 30px;
   animation: flutuarBanner 4s ease-in-out infinite;
@@ -1355,14 +1455,14 @@ header {
   }
 }
 
-.cookie-text {
+.texto-cookies {
   font-size: 16px;
   max-width: 800px;
   text-align: left;
   flex: 1;
 }
 
-.cookie-btn {
+.botao-cookies {
   background-color: var(--secondary-color--);
   color: var(--padrao-color);
   border: none;
@@ -1376,13 +1476,13 @@ header {
     background-color 0.2s;
 }
 
-.cookie-btn:hover {
+.botao-cookies:hover {
   transform: scale(1.05);
   background-color: var(--terty-color--);
 }
 
 @media (max-width: 768px) {
-  .cookie-banner {
+  .banner-cookies {
     flex-direction: column;
     text-align: center;
     align-items: flex-start;
@@ -1391,22 +1491,22 @@ header {
     padding: 20px;
     width: calc(100% - 30px);
   }
-  .cookie-btn {
+  .botao-cookies {
     width: 100%;
   }
 }
 
-/* --- Adaptação para Tablets e Laptops Menores (iPads, telas de 769px a 1024px) --- */
+/* 14. Ajustes finos em telas extras */
 @media (min-width: 769px) and (max-width: 1024px) {
   .container {
     padding: 5% 40px 0;
   }
-  .inicioContainer {
+  .container-inicio {
     flex-direction: column-reverse;
     gap: 50px;
     gap: 30px;
   }
-  .foto-wrapper {
+  .container-foto {
     width: 750px;
     width: 400px;
     height: 430px;
@@ -1418,38 +1518,75 @@ header {
     font-size: 18px;
   }
   .texto br {
-    display: none; /* Deixa o texto fluir livremente sem quebras */
+    display: none; /* Remove quebras de linha */
   }
-  .social-links {
+  .links-sociais {
     gap: 15px;
   }
-  .social-links a {
+  .links-sociais a {
     width: 60px;
     height: 60px;
     padding: 0;
     border-radius: 50%;
-    font-size: 0; /* Esconde o texto para deixar só o ícone */
-    gap: 0; /* Anula o gap do Desktop para alinhar o ícone ao centro */
+    font-size: 0; /* Oculta texto */
+    gap: 0; /* Alinha ícone */
   }
-  .projeto-card {
-    flex: 0 0 350px;
-    height: 220px;
+  .cartao-projeto {
+    flex: 0 0 320px;
+    height: 200px;
   }
-  .card-formacao {
-    flex: 0 0 300px;
-    min-height: 200px;
+  .cartao-formacao {
+    flex: 0 0 280px;
+    min-height: 180px;
     padding: 20px;
   }
-  .info-projeto {
+  .informacoes-projeto {
     gap: 30px;
   }
-  .thumb-item {
+  .item-miniatura {
     flex: 0 0 200px;
     height: 130px;
   }
+  .contato {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px 20px;
+    gap: 20px;
+  }
+  .contato p {
+    text-align: left;
+    max-width: 400px;
+  }
+  .contato p br {
+    display: none;
+  }
+  .call {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  /* Espaçamento da seção projetos em tablet */
+  .secao-projetos {
+    margin-top: 30px;
+    margin-bottom: 70px;
+  }
+  .projetos-carrossel {
+    margin-bottom: 30px;
+  }
+  .barra-progresso-segmentada {
+    max-width: 280px;
+    margin: -15px auto 30px;
+    gap: 7px;
+  }
+  .titulo-ux {
+    margin-top: 40px;
+  }
 }
 
-/* --- Adaptação para Monitores Ultra-Wide, iMacs e Smart TVs (Telas Gigantes) --- */
+/* Adaptação para monitores ultra-wide e TVs */
 @media (min-width: 1440px) {
   header,
   .container {
@@ -1485,7 +1622,7 @@ header {
     height: 190px;
   }
   .banner-wrapper img {
-    max-height: 70vh; /* Impede que a foto cubra 100% de uma tela de TV limitando a 70% da altura dela */
+    max-height: 70vh; /* Limita a altura da imagem */
     object-fit: cover;
     object-position: top;
   }

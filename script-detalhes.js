@@ -1,4 +1,5 @@
-// Banco de dados com imagens "temporárias" reutilizando as capas
+/* Dados dos projetos */
+// Informações dos projetos separadas do HTML.
 const dadosProjetos = {
     "nova-fit": {
         titulo: "Nova Fit",
@@ -58,12 +59,14 @@ const dadosProjetos = {
     }
 };
 
-// 1. Pega o ID da URL
+/* Lógica da página */
+// Obtém o ID do projeto a partir da URL.
 const urlParams = new URLSearchParams(window.location.search);
 const projetoId = urlParams.get('id');
 const projeto = dadosProjetos[projetoId];
 let imagemAtualIndex = 0;
 
+// Preenche o conteúdo da página usando os dados do projeto.
 if (projeto) {
     document.title = `${projeto.titulo} | Detalhes`;
     document.getElementById('projeto-banner').innerHTML = `<img src="${projeto.banner}" alt="${projeto.titulo}">`;
@@ -71,7 +74,7 @@ if (projeto) {
 
     const galeriaContainer = document.getElementById('projeto-galeria');
     projeto.galeria.forEach((img, index) => {
-        galeriaContainer.innerHTML += `<div class="thumb-item" tabindex="0" role="button" aria-label="Ver miniatura ${index + 1}" onclick="trocarImagem(${index})" onkeydown="if(event.key === 'Enter') trocarImagem(${index})"><img src="${img}" alt="Miniatura ${index + 1}"></div>`;
+        galeriaContainer.innerHTML += `<div class="item-miniatura" tabindex="0" role="button" aria-label="Ver miniatura ${index + 1}" onclick="trocarImagem(${index})" onkeydown="if(event.key === 'Enter') trocarImagem(${index})"><img src="${img}" alt="Miniatura ${index + 1}"></div>`;
     });
 
     const linksContainer = document.getElementById('lista-links');
@@ -80,14 +83,15 @@ if (projeto) {
     });
 }
 
+// Alterna a imagem principal do projeto.
 function trocarImagem(index) {
     imagemAtualIndex = index;
     const imgPrincipal = document.querySelector('#projeto-banner img');
     if (imgPrincipal && projeto && projeto.galeria) {
-        imgPrincipal.style.opacity = 0; // Inicia o fade out
+        imgPrincipal.style.opacity = 0; 
         setTimeout(() => {
             imgPrincipal.src = projeto.galeria[index];
-            imgPrincipal.style.opacity = 1; // Inicia o fade in com a nova imagem
+            imgPrincipal.style.opacity = 1; 
         }, 200);
     }
 }
@@ -99,15 +103,15 @@ function scrollGaleria(direcao) {
     else if (imagemAtualIndex >= projeto.galeria.length) imagemAtualIndex = 0;
     trocarImagem(imagemAtualIndex);
     
-    // Rola a galeria para manter a miniatura visível e centralizada
+    // Centraliza a miniatura selecionada.
     const container = document.getElementById('projeto-galeria');
-    const thumbs = container.querySelectorAll('.thumb-item');
+    const thumbs = container.querySelectorAll('.item-miniatura');
     if (thumbs[imagemAtualIndex]) {
         thumbs[imagemAtualIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 }
 
-// Script de ativação do Menu Mobile (Reaproveitado)
+// Comportamento do menu mobile.
 const menuHamburguer = document.querySelector('.menu-hamburguer');
 const navbar = document.querySelector('.navbar');
 if (menuHamburguer && navbar) {
@@ -117,24 +121,23 @@ if (menuHamburguer && navbar) {
   });
 }
 
-// --- Cookie Banner Dinâmico ---
+/* Aviso de cookies compartilhado */
 function initCookieBanner() {
-  // Verifica se o usuário já aceitou os cookies
   if (!localStorage.getItem('cookiesAceitos')) {
     const banner = document.createElement('div');
-    banner.className = 'cookie-banner';
+    banner.className = 'banner-cookies';
     banner.innerHTML = `
-      <div class="cookie-icon" style="font-size: 32px;" aria-hidden="true">🍪</div>
-      <div class="cookie-text">
+      <div class="icone-cookies" style="font-size: 32px;" aria-hidden="true">🍪</div>
+      <div class="texto-cookies">
         Usamos cookies para melhorar sua experiência no meu site pessoal. Ao continuar navegando, você concorda com o uso de cookies.
       </div>
-      <button class="cookie-btn" aria-label="Aceitar cookies">Entendi</button>
+      <button class="botao-cookies" aria-label="Aceitar cookies">Entendi</button>
     `;
     document.body.appendChild(banner);
 
     setTimeout(() => banner.classList.add('show'), 500);
 
-    banner.querySelector('.cookie-btn').addEventListener('click', () => {
+    banner.querySelector('.botao-cookies').addEventListener('click', () => {
       localStorage.setItem('cookiesAceitos', 'true');
       banner.classList.remove('show');
       setTimeout(() => banner.remove(), 500);
