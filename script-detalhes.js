@@ -79,7 +79,7 @@ if (projeto) {
 
     const linksContainer = document.getElementById('lista-links');
     projeto.links.forEach(link => {
-        linksContainer.innerHTML += `<li><strong>${link.nome}</strong><br><a href="${link.url}" target="_blank">${link.url}</a></li>`;
+        linksContainer.innerHTML += `<li><strong>${link.nome}</strong><br><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.url}</a></li>`;
     });
 }
 
