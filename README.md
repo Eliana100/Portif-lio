@@ -1,4 +1,4 @@
-# Portifólio Pessoal - Eliana Almeida ✧
+# Portfólio Pessoal - Eliana Almeida ✧
 
 <div alight=center>
   <img width="1920" height="1080" alt="capa-github" src="https://github.com/user-attachments/assets/e49ee350-f8e5-4985-b4bd-e536f5a3f308" />
